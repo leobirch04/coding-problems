@@ -1,3 +1,4 @@
+package strings;
 public class palindrome {
 
     static boolean palin( String str){

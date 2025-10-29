@@ -1,3 +1,4 @@
+package strings;
 public class stringRotation {
 
     static String[] rotate(String[] str){

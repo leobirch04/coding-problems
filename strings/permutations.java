@@ -1,3 +1,4 @@
+package strings;
 public class permutations {
     
     public static boolean isPermutation(String a, String b){

@@ -1,3 +1,4 @@
+package strings;
 public class oneaway {
 
     static boolean check(String a, String b){

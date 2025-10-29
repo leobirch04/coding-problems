@@ -1,3 +1,4 @@
+package strings;
 public class unique {
 
     public static boolean un(String str) { //Function to check if all characters in a string are unique

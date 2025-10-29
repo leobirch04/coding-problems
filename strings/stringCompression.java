@@ -1,3 +1,4 @@
+package strings;
 
 public class stringCompression {
     static String compress(String input){

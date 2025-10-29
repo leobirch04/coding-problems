@@ -1,3 +1,4 @@
+package strings;
 public class urlify {
 
     static char[] replace(char[] chars){  // replace all spaces with %20
