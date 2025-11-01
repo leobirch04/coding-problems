@@ -23,4 +23,5 @@ public class deleteNode {
         list.printList();
 
     } 
+
 }
