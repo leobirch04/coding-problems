@@ -1,6 +1,8 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -9,77 +11,47 @@ public class sudoku {
 
 
     public static boolean isValidSudoku(char[][] board) {
-        int len = board[0].length;
-        for (int x = 0; x < len; x++){
-            
-
-            Map<Character, Integer> freqHorMap = new HashMap<>();
-            Map<Character, Integer> freqVerMap = new HashMap<>();
-
-            for(int i = 0; i < len; i++){
-                freqHorMap.put( board[x][i],freqHorMap.getOrDefault( board[x][i] , 0) + 1);
-                freqVerMap.put( board[i][x],freqVerMap.getOrDefault( board[i][x] , 0) + 1);
-            }
-
-            Iterator<Map.Entry<Character, Integer>> it1 = freqHorMap.entrySet().iterator();
-            Iterator<Map.Entry<Character, Integer>> it2 = freqVerMap.entrySet().iterator();
-
-            while (it1.hasNext() && it2.hasNext()) {
-                Map.Entry<Character, Integer> e1 = it1.next();
-                Map.Entry<Character, Integer> e2 = it2.next();
-
-                if (e1.getValue() > 1 && e1.getKey() != '.') {
-                    return false;
-                    
-                }
-                if (e2.getValue() > 1 && e2.getKey() != '.') {
-                    return false;
-                    
-                }
-            }
-
-            
-
-
-        }
-
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-
-            }
-        }
-
-
-        return true;
-    }
-
-
-
-    public boolean isValidSudoku1(char[][] board) {
-        boolean[][] rows = new boolean[9][9];
-        boolean[][] cols = new boolean[9][9];
-        boolean[][] boxes = new boolean[9][9];
+        HashSet<Character> row = new HashSet<>();
+        HashSet<Character> column = new HashSet<>();
+        ArrayList<HashSet<Character>> squares = new ArrayList<>();
 
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (board[i][j] != '.') {
-                    int num = board[i][j] - '1';
-                    int boxIndex = (i / 3) * 3 + (j / 3);
+            squares.add(new HashSet<Character>());
+        }
 
-                    if (rows[i][num] || cols[j][num] || boxes[boxIndex][num]) {
+        for (int i = 0; i < board.length; i++) {
+            row.clear();
+            column.clear();
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] != '.' ) {
+                    boolean check = row.add(board[i][j]);
+                    if (!check) {
                         return false;
                     }
-
-                    rows[i][num] = cols[j][num] = boxes[boxIndex][num] = true;
+                    int square_row = i / 3;     
+                    int square_col = j / 3;       
+                    int box = square_row + 3 * square_col;
+                    HashSet<Character> set = squares.get(box);
+                    check = set.add(board[i][j]);
+                    if (!check) {
+                        return false;
+                    }
                 }
+                if (board[j][i] != '.' ) {
+                    boolean check = column.add(board[j][i]);
+                    if (!check) {
+                        return false;
+                    }
+                }
+                
+                
             }
         }
+
+
         return true;
     }
-    
 
-    public static void main(String[] args) {
-        
-    }
+
     
 }
